@@ -4,7 +4,6 @@ import (
     "net/url"
     "strconv"
     "strings"
-    "time"
 )
 
 type TradesService struct {
@@ -20,17 +19,12 @@ type Trade struct {
     TradeId   int64 `json:"tid,int"`
 }
 
-func (el *Trade) Time() *time.Time {
-    t := time.Unix(el.Timestamp, 0)
-    return &t
-}
-
-func (s *TradesService) All(pair string, timestamp time.Time, limitTrades int) ([]Trade, error) {
+func (s *TradesService) All(pair string, timestamp int64, limitTrades int) ([]Trade, error) {
     pair = strings.ToUpper(pair)
 
     params := url.Values{}
-    if !time.Time.IsZero(timestamp) {
-        params.Add("timestamp", strconv.FormatInt(timestamp.Unix(), 10))
+    if timestamp != 0 {
+        params.Add("timestamp", strconv.FormatInt(timestamp, 10))
     }
     if limitTrades != 0 {
         params.Add("limit_trades", strconv.Itoa(limitTrades))
