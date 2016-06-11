@@ -20,6 +20,7 @@ type Trade struct {
 	TradeId   int64 `json:"tid,int"`
 }
 
+// All returns trades where first is newest and last is oldest
 func (s *TradesService) All(pair string, timestamp int64, limitTrades int) ([]Trade, error) {
 	pair = strings.ToUpper(pair)
 
