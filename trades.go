@@ -1,7 +1,6 @@
 package bitfinex
 
 import (
-	"math/big"
 	"net/url"
 	"strconv"
 	"strings"
@@ -12,8 +11,8 @@ type TradesService struct {
 }
 
 type Trade struct {
-	Price     big.Float
-	Amount    big.Float
+	Price     string
+	Amount    string
 	Exchange  string
 	Type      string
 	Timestamp int64
